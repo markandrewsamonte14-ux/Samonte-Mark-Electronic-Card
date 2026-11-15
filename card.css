@@ -1,0 +1,219 @@
+* { box-sizing: border-box; }
+
+body { 
+  margin: 0; 
+  min-height: 100vh; 
+  display: grid; 
+  place-items: center; 
+  overflow: hidden; 
+  background: pink; 
+  font-family: Arial, sans-serif; 
+}
+
+.scene { 
+  width: min(100vw, 900px); 
+  min-height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
+  padding: 28px 16px 20px; 
+}
+
+.card-area { 
+  position: relative; 
+  width: min(88vw, 560px); 
+  height: 440px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
+  perspective: 1100px; 
+}
+
+.envelope { 
+  position: relative; 
+  width: min(84vw, 470px); 
+  height: 300px; 
+  border-radius: 18px; 
+  filter: drop-shadow(0 17px 13px rgba(90,48,65,.18)); 
+  transform: translateY(26px); 
+  cursor: pointer; 
+}
+
+.envelope-back { 
+  position: absolute; 
+  inset: 0; 
+  background: #c90020; 
+  border-radius: 18px; 
+  z-index: 0; 
+}
+
+.letter { 
+  position: absolute; 
+  z-index: 1; 
+  left: 5%; 
+  bottom: 8px; 
+  width: 90%; 
+  height: 270px; 
+  padding: 24px 28px 18px; 
+  background: #fffefe; 
+  border-radius: 11px 11px 5px 5px;
+  color: #60434d; text-align: center; 
+  box-shadow: 0 2px 8px rgba(70,40,55,.12); 
+  transform: translateY(0);
+  transition: transform 850ms cubic-bezier(.2,.75,.25,1); overflow: hidden; 
+}
+
+.to { 
+  margin: 0 auto 26px; 
+  width: fit-content; 
+  padding: 2px 12px; 
+  background: #f9dfe2; 
+  font-family: Georgia, serif; 
+  font-style: italic; 
+  font-size: 15px; 
+}
+
+.message { 
+  font-family: "Brush Script MT", "Segoe Script", cursive; 
+  font-style: italic; 
+  font-size: clamp(19px, 4.5vw, 29px); 
+  line-height: 1.35; 
+}
+
+.message p { 
+  margin: 8px 0; 
+  background: #fbe3e5; 
+  padding: 1px 5px; 
+}
+
+.message p:last-child {
+  display: block;
+  background: #fbe3e5;
+  margin-top: 8px;
+}
+
+.signature { 
+  margin-top: 14px; 
+  font-family: Georgia, serif; 
+  font-size: 12px; 
+  font-style: italic; 
+  opacity: .72; 
+}
+
+.front-wrap { 
+  position: absolute; 
+  inset: 0; 
+  z-index: 3; 
+  border-radius: 18px; 
+  overflow: hidden; 
+}
+
+.envelope-front { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(25deg, #d90020, #f20d2b 55%, #d90020); 
+  clip-path: polygon(0 0, 50% 51%, 100% 0, 100% 100%, 0 100%); 
+}
+
+.envelope-front::before { 
+  content: ""; 
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #ff344b, #e00021); 
+  clip-path: polygon(0 100%, 50% 51%, 100% 100%); 
+}
+
+.flap-wrap { 
+  position: absolute; 
+  top: 0; 
+  left: 0; width: 100%; height: 58%;
+  z-index: 4; 
+  border-radius: 18px 18px 0 0;
+  overflow: hidden; 
+  transform-origin: top center;
+  transition: transform 650ms ease, opacity .2s ease .3s, visibility 0s .5s; 
+}
+
+.flap { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(145deg, #ff344b, #f20d2b 65%, #dc001f); 
+  clip-path: polygon(0 0, 100% 0, 50% 100%); 
+}
+
+.heart-seal { 
+  position: absolute; 
+  z-index: 5; 
+  left: 50%; 
+  top: 55%; 
+  transform: translate(-50%,-50%);
+  font-size: 62px; line-height: 1;
+  filter: drop-shadow(0 2px 3px rgba(90,0,10,.15)); 
+  transition: opacity .2s ease; 
+}
+
+.envelope.open .flap-wrap { transform: rotateX(180deg); opacity: 0; 
+  visibility: hidden; 
+}
+
+.envelope.open .heart-seal { 
+  opacity: 0; 
+  visibility: hidden; 
+}
+
+.envelope.open .letter { 
+  transform: translateY(-215px);
+  transition-delay: 250ms; 
+}
+
+.hint { 
+  margin: 16px 0 0; 
+  color: #936c7a; 
+  font-size: 14px; 
+  text-align: center; 
+}
+
+.hearts-container { 
+  position: absolute; 
+  inset: 0; 
+  pointer-events: none; 
+  overflow: visible; 
+  z-index: 10; 
+}
+
+.flying-heart { 
+  position: absolute; 
+  bottom: 40%; 
+  left: 50%; 
+  font-size: 24px; 
+  opacity: 0; 
+  animation: heartFloat 2.2s ease-out forwards; 
+}
+
+@keyframes heartFloat {
+  0% { 
+    transform: translate(0,0) scale(.5); 
+    opacity: 0; } 15% { opacity: 1; 
+    transform: translate(0,-20px)
+    scale(1); } 100% { transform:
+    translate(var(--drift), -280px) scale(1.2); opacity: 0; } 
+}
+
+@media (max-width: 520px) {
+  .card-area { 
+    height: 390px; }
+  
+  .envelope { 
+    height: 250px; 
+    border-radius: 16px; 
+  }
+ 
+  .letter { 
+    height: 230px; 
+    padding: 19px 17px 12px; 
+  }
+  
+  .envelope.open .letter { 
+    transform: translateY(-185px); 
+  }
+}
