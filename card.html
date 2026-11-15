@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>A Letter for You</title>
+
+        <link rel="stylesheet" href="card.css">
+    </head>
+
+    <body>
+
+        <main class="scene">
+
+            <section class="card-area">
+
+                <div class="envelope" id="envelope">
+
+                    <div class="envelope-back"></div>
+
+                    <article class="letter">
+
+                        <p class="to">
+                            To: <span id="recipient"></span>
+                        </p>
+
+                        <div class="message">
+                            <p id="lineOne"></p>
+                            <p id="lineTwo"></p>
+                            <p id="lineThree"></p>
+                        </div>
+
+                        <p class="signature" id="signature"></p>
+
+                    </article>
+
+                    <div class="front-wrap">
+                        <div class="envelope-front"></div>
+                    </div>
+
+                    <div class="flap-wrap">
+                        <div class="flap"></div>
+                    </div>
+
+                    <div class="heart-seal" aria-hidden="true">
+                        🤍
+                    </div>
+
+                </div>
+
+                <div class="hearts-container" id="heartsContainer"></div>
+
+            </section>
+
+            <p class="hint" id="hint">
+                Tap the envelope or swipe up to open 💌
+            </p>
+
+        </main>
+
+        <script src="card.js"></script>
+
+    </body>
+
+</html>
